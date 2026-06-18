@@ -33,7 +33,20 @@ h1 small{font-size:10px;color:rgba(255,255,255,0.5);display:block;font-weight:40
 .b-room{background:#eef2ff;color:var(--navy);border:1px solid #c7d1ef}
 .b-col{background:var(--teal);color:#fff;font-size:16px;font-weight:700;padding:4px 12px}
 .lcontent{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.empty{padding:40px 20px;text-align:center}
+.empty{padding:28px 20px;text-align:center}
+.empty .ei{animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 16px}
+.info-card{background:var(--card);border-radius:12px;padding:12px 14px;box-shadow:0 1px 4px rgba(26,39,68,0.07)}
+.info-card .inum{font-size:22px;font-weight:700;color:var(--navy);line-height:1}
+.info-card .ilabel{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.3px}
+.info-card .ibar{height:3px;border-radius:2px;background:var(--border);margin-top:8px;overflow:hidden}
+.info-card .ibar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--teal2));transition:width 0.6s ease}
+.divider{height:1px;background:var(--border);margin:0 14px 12px;opacity:0.6}
+.quick-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.5px;padding:0 14px 6px;text-transform:uppercase}
+.quick-chips{display:flex;gap:6px;padding:0 14px 16px;flex-wrap:wrap}
+.qchip{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:500;color:var(--navy);cursor:pointer;transition:all 0.15s}
+.qchip:active{background:var(--teal);color:#fff;border-color:var(--teal)}
 .ei{font-size:40px;margin-bottom:12px}
 .et{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0.2px}
 .es{font-size:12px;color:#c0c8d8;margin-top:6px;line-height:1.6}
@@ -225,7 +238,58 @@ function srch(code){
   }
 }
 function sel(code){inp.value=code;clrb.style.display='flex';srch(code);}
-function showEmpty(){document.getElementById('lc').innerHTML='<div class="empty"><div class="ei">&#128230;</div><div class="et">\u5546\u54c1\u30b3\u30fc\u30c9\u3092\u5165\u529b</div><div class="es">\u68da\u306e\u5834\u6240\u304c\u308f\u304b\u308a\u307e\u3059</div></div>';}
+function showEmpty(){
+  var rooms=Object.keys(ROOMS);
+  var total=PRODUCTS.length;
+  var room1=rooms[0]||'';
+  var room2=rooms[1]||'';
+  var cnt1=PRODUCTS.filter(function(p){return p.room===room1;}).length;
+  var cnt2=PRODUCTS.filter(function(p){return p.room===room2;}).length;
+  var cols1=(ROOMS[room1]||{cols:[]}).cols.length;
+  var cols2=(ROOMS[room2]||{cols:[]}).cols.length;
+  var now=new Date();
+  var dow=['\u65e5','\u6708','\u706b','\u6c34','\u6728','\u91d1','\u571f'][now.getDay()];
+  var dateStr=now.getFullYear()+'/'+(now.getMonth()+1)+'/'+(now.getDate())+' ('+dow+')';
+  var h=String(now.getHours()).padStart(2,'0'),mn=String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('lc').innerHTML=
+    '<div class="empty"><div class="ei">&#128230;</div>'+
+    '<div class="et">\u5546\u54c1\u30b3\u30fc\u30c9\u3092\u5165\u529b</div>'+
+    '<div class="es">'+dateStr+'&nbsp;&nbsp;'+h+':'+mn+'</div></div>'+
+    '<div class="divider"></div>'+
+    '<div class="info-grid">'+
+      '<div class="info-card">'+
+        '<div class="inum">'+total+'</div>'+
+        '<div class="ilabel">\u7dcf\u5546\u54c1\u6570</div>'+
+        '<div class="ibar"><div class="ibar-fill" style="width:100%"></div></div>'+
+      '</div>'+
+      '<div class="info-card">'+
+        '<div class="inum">'+rooms.length+'</div>'+
+        '<div class="ilabel">\u30a8\u30ea\u30a2</div>'+
+        '<div class="ibar"><div class="ibar-fill" style="width:100%;background:linear-gradient(90deg,#6a90cc,#a0b8e8)"></div></div>'+
+      '</div>'+
+      (room1?'<div class="info-card">'+
+        '<div class="inum">'+cnt1+'</div>'+
+        '<div class="ilabel">'+room1+'</div>'+
+        '<div class="ibar"><div class="ibar-fill" style="width:'+Math.round(cnt1/total*100)+'%"></div></div>'+
+      '</div>':'')+
+      (room2?'<div class="info-card">'+
+        '<div class="inum">'+cnt2+'</div>'+
+        '<div class="ilabel">'+room2+'</div>'+
+        '<div class="ibar"><div class="ibar-fill" style="width:'+Math.round(cnt2/total*100)+'%;background:linear-gradient(90deg,#f5a623,#f7c06a)"></div></div>'+
+      '</div>':'')+
+    '</div>'+
+    '<div class="quick-label">QUICK SEARCH</div>'+
+    '<div class="quick-chips">'+
+      '<div class="qchip" onclick="quickSearch(\'A\')">A系列</div>'+
+      '<div class="qchip" onclick="quickSearch(\'C\')">C系列</div>'+
+      '<div class="qchip" onclick="quickSearch(\'G\')">G系列</div>'+
+    '</div>';
+}
+function quickSearch(prefix){
+  inp.value=prefix;
+  clrb.style.display='flex';
+  srch(prefix);
+}
 function showRes(p){
   var rc=document.getElementById('rescrd');rc.style.display='block';
   document.getElementById('pnm').textContent=p.name||p.code;
