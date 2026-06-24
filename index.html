@@ -49,7 +49,7 @@ h1 small{font-size:10px;color:rgba(255,255,255,0.45);display:block;font-weight:4
 
 /* layout */
 .layout{display:flex;flex:1;overflow:hidden;position:relative}
-.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border)}
+.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border);position:relative;overflow:hidden}.lpanel::before{content:'LUMI_Onga';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:60px;font-weight:900;color:rgba(37,99,235,0.04);pointer-events:none;letter-spacing:-2px;line-height:1;z-index:0;white-space:nowrap}
 .rpanel{flex:1;display:flex;flex-direction:column;overflow:visible;background:linear-gradient(160deg,#f5f7fc,#eef1f8);position:relative}
 
 /* search bar */
@@ -259,7 +259,7 @@ h1 small{font-size:10px;color:rgba(255,255,255,0.45);display:block;font-weight:4
   <h1>ルミピッキング検索<small id="hsub"></small></h1>
   <div class="hstats">
     <div class="hstat"><div class="hstat-n" id="hn0">-</div><div class="hstat-l">1F釣具</div></div>
-    <div class="hstat"><div class="hstat-n" id="hn1">-</div><div class="hstat-l">廸下</div></div>
+    <div class="hstat"><div class="hstat-n" id="hn1">-</div><div class="hstat-l">廊下</div></div>
     <div class="hstat"><div class="hstat-n" id="hn2">-</div><div class="hstat-l">ノベルティ</div></div>
   </div>
   <span style="font-size:10px;color:rgba(255,255,255,0.18);letter-spacing:.6px;margin-right:8px">by MajorWoo / ウー</span>
@@ -372,10 +372,38 @@ function renderMap(room){
 function swRoomIdx(idx){curRoom=Object.keys(ROOMS)[idx];curCol=null;renderMap(curRoom);setList(null);}
 function updMap(){
   document.querySelectorAll('.shelf').forEach(function(el){
-    var col=el.id.replace('shelf-','');var cnt=CC[curRoom+'|'+col]||0;
+    var col=el.id.replace('shelf-','').replace(/-.*$/,'');
+    var cnt=CC[curRoom+'|'+col]||0;
     el.classList.remove('hi','di','it');
     if(curCol){if(col===curCol)el.classList.add('hi');else el.classList.add('di');}
     else if(cnt>0)el.classList.add('it');
+    var badge=el.querySelector('.shelf-badge');
+    if(!badge&&cnt>0){
+      badge=document.createElementNS('http://www.w3.org/2000/svg','g');
+      badge.setAttribute('class','shelf-badge');
+      var rect=el.querySelector('rect');
+      if(rect){
+        var x=parseFloat(rect.getAttribute('x')||0)+parseFloat(rect.getAttribute('width')||30)-10;
+        var y=parseFloat(rect.getAttribute('y')||0)+10;
+        var bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        bg.setAttribute('cx',x);bg.setAttribute('cy',y);bg.setAttribute('r','8');
+        bg.setAttribute('fill','#f5a623');
+        bg.setAttribute('stroke','rgba(255,255,255,0.9)');bg.setAttribute('stroke-width','1.5');
+        var txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        txt.setAttribute('x',x);txt.setAttribute('y',y);
+        txt.setAttribute('text-anchor','middle');txt.setAttribute('dominant-baseline','middle');
+        txt.setAttribute('font-size','7');txt.setAttribute('font-weight','700');
+        txt.setAttribute('fill','#fff');txt.setAttribute('pointer-events','none');
+        txt.textContent=cnt>99?'99+':cnt;
+        badge.appendChild(bg);badge.appendChild(txt);
+        el.appendChild(badge);
+      }
+    } else if(badge){
+      var txt=badge.querySelector('text');
+      var bg=badge.querySelector('circle');
+      if(bg)bg.setAttribute('fill',curCol&&col===curCol?'#fff':'#f5a623');
+      if(txt){txt.textContent=cnt>99?'99+':cnt;txt.setAttribute('fill',curCol&&col===curCol?'#f5a623':'#fff');}
+    }
   });
 }
 function bgClick(e){
@@ -470,6 +498,14 @@ function showCands(code,part,isName){
   document.getElementById('lc').innerHTML='<div class="clist"><div class="cslb">'+lbl+'</div><div class="ccard">'+rows+'</div></div>';
 }
 
+function countUp(el,target,duration){
+  var start=0,step=Math.ceil(target/30);
+  var timer=setInterval(function(){
+    start+=step;
+    if(start>=target){start=target;clearInterval(timer);}
+    el.textContent=start;
+  },duration/30);
+}
 function showEmpty(){
   var rooms=Object.keys(ROOMS),total=PRODUCTS.length;
   var room1=rooms[0]||'',room2=rooms[1]||'';
@@ -503,6 +539,11 @@ function showEmpty(){
   html+='<div class="qchip" onclick="quickSearch(\'G\')">G\u30b7\u30ea\u30fc\u30ba</div>';
   html+='</div></div>';
   document.getElementById('lc').innerHTML=html;
+  document.querySelectorAll('.stat-num').forEach(function(el){
+    var n=parseInt(el.textContent)||0;
+    el.textContent='0';
+    countUp(el,n,600);
+  });
   initTruckEgg();
 }
 function quickSearch(prefix){inp.value=prefix;clrb.style.display='flex';srch(prefix);}
