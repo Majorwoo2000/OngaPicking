@@ -52,7 +52,7 @@ h1 small{font-size:10px;color:rgba(255,255,255,0.45);display:block;font-weight:4
 
 /* layout */
 .layout{display:flex;flex:1;overflow:hidden}
-.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border);position:relative;overflow:hidden}.lpanel::before{content:'LUMI';position:absolute;bottom:-20px;right:-20px;font-size:120px;font-weight:900;color:rgba(37,99,235,0.04);pointer-events:none;letter-spacing:-4px;line-height:1;z-index:0}
+.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border);position:relative;overflow:hidden}.lpanel::before{content:'LUMI_Onga';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:60px;font-weight:900;color:rgba(37,99,235,0.04);pointer-events:none;letter-spacing:-4px;line-height:1;z-index:0}
 .rpanel{flex:1;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(160deg,#f5f7fc,#eef1f8)}
 
 /* search bar */
@@ -359,8 +359,8 @@ function updMap(){
         var x=parseFloat(rect.getAttribute('x')||0)+parseFloat(rect.getAttribute('width')||30)-10;
         var y=parseFloat(rect.getAttribute('y')||0)+10;
         var bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
-        bg.setAttribute('cx',x);bg.setAttribute('cy',y);bg.setAttribute('r','8');
-        bg.setAttribute('fill','#2563eb');
+        bg.setAttribute('cx',x);bg.setAttribute('cy',y);bg.setAttribute('r','8');bg.setAttribute('stroke','rgba(255,255,255,0.9)');bg.setAttribute('stroke-width','1.5');bg.setAttribute('filter','drop-shadow(0 1px 2px rgba(0,0,0,0.18))');
+        bg.setAttribute('fill','#f5a623');
         var txt=document.createElementNS('http://www.w3.org/2000/svg','text');
         txt.setAttribute('x',x);txt.setAttribute('y',y);
         txt.setAttribute('text-anchor','middle');txt.setAttribute('dominant-baseline','middle');
@@ -374,8 +374,8 @@ function updMap(){
       var txt=badge.querySelector('text');
       var bg=badge.querySelector('circle');
       if(txt)txt.textContent=cnt>99?'99+':cnt;
-      if(bg)bg.setAttribute('fill',curCol&&col===curCol?'#fff':'#2563eb');
-      if(txt&&curCol&&col===curCol)txt.setAttribute('fill','#2563eb');
+      if(bg)bg.setAttribute('fill',curCol&&col===curCol?'#fff':'#f5a623');
+      if(txt&&curCol&&col===curCol)txt.setAttribute('fill','#f5a623');
       else if(txt)txt.setAttribute('fill','#fff');
     }
   });
