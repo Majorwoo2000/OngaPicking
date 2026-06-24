@@ -414,6 +414,7 @@ function addHistory(p){
   HISTORY=HISTORY.filter(function(h){return h.code!==p.code;});
   HISTORY.unshift({code:p.code,name:p.name,col:p.col});
   if(HISTORY.length>6)HISTORY.pop();
+  try{localStorage.setItem('lumi_history',JSON.stringify(HISTORY));}catch(e){}
 }
 function clearHistory(){
   HISTORY=[];
@@ -734,6 +735,7 @@ function parseWS(xml,ss){
   return rows;
 }
 setInterval(function(){if(!inp.value.trim())showEmpty();},60000);
+try{var _h=localStorage.getItem('lumi_history');if(_h)HISTORY=JSON.parse(_h);}catch(e){}
 updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();
 
 </script>
