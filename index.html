@@ -19,39 +19,31 @@ body{
 }
 
 /* header */
-header{
-  background:#0a0e1f;color:#fff;padding:10px 16px;
-  display:flex;align-items:center;gap:10px;flex-shrink:0;
-  position:relative;border-bottom:1px solid rgba(37,99,235,0.25)
-}
-header::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,#2563eb 35%,#60a5fa 70%,transparent);
-  pointer-events:none
-}
+header{background:linear-gradient(180deg,#dbeafe 0%,#eff6ff 100%);color:#1e3a8a;padding:0 16px;height:72px;display:flex;align-items:center;gap:14px;flex-shrink:0;position:relative;border-bottom:1px solid rgba(37,99,235,0.15);overflow:hidden}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.3) 50%,transparent);pointer-events:none}
 .logo{
   width:28px;height:28px;
   background:linear-gradient(135deg,#2563eb,#60a5fa);
   border-radius:7px;display:flex;align-items:center;justify-content:center;
   flex-shrink:0;box-shadow:0 2px 8px rgba(37,99,235,0.4)
 }
-h1{font-size:18px;font-weight:700;flex:1;letter-spacing:-0.3px;display:flex;align-items:baseline;gap:10px}
-h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spacing:0.2px;white-space:nowrap}
+h1{font-size:16px;font-weight:700;flex:1;letter-spacing:-0.3px;display:flex;align-items:baseline;gap:8px;white-space:nowrap;min-width:0;overflow:hidden;color:#1e3a8a}
+h1 small{font-size:11px;color:#3b82f6;font-weight:400;letter-spacing:0.2px;white-space:nowrap;opacity:.7}
 .hbtn{
   background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
   color:#fff;border-radius:8px;padding:6px 10px;font-size:11px;cursor:pointer;
   transition:all 0.15s
 }
 .hbtn:active{transform:scale(0.93)}
-.hbtn.on{background:linear-gradient(135deg,#2563eb,#4f46e5);border-color:transparent;box-shadow:0 2px 16px rgba(79,70,229,0.4)}
+.hbtn.on{background:#2563eb;color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(37,99,235,0.3)}
 
 /* layout */
-.layout{display:flex;flex:1;overflow:hidden;position:relative}
-.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border);position:relative;overflow:hidden}.lpanel::before{content:'LUMI_Onga';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:60px;font-weight:900;color:rgba(37,99,235,0.04);pointer-events:none;letter-spacing:-2px;line-height:1;z-index:0;white-space:nowrap}
+.layout{display:flex;flex:1;overflow:hidden;position:relative;flex-direction:row}
+.lpanel{display:flex;flex-direction:column;width:400px;flex-shrink:0;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:width .3s}.lpanel::before{content:'LUMI_Onga';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:60px;font-weight:900;color:rgba(37,99,235,0.04);pointer-events:none;letter-spacing:-2px;line-height:1;z-index:0;white-space:nowrap}
 .rpanel{flex:1;display:flex;flex-direction:column;overflow:visible;background:linear-gradient(160deg,#f5f7fc,#eef1f8);position:relative}
 
 /* search bar */
-.sbar{background:linear-gradient(135deg,#1e2d52,#2a3d6e);padding:12px 14px;flex-shrink:0}
+.sbar{background:linear-gradient(135deg,#0d1230,#111827);padding:16px 18px;flex-shrink:0}.swrap{display:flex;align-items:center;gap:12px;border-radius:16px;padding:16px 18px;background:#0d1230;position:relative;box-shadow:0 0 0 1.5px #2563eb,0 0 16px rgba(96,165,250,0.2);animation:shineGlow 3s ease-in-out infinite}@keyframes shineGlow{0%,100%{box-shadow:0 0 0 1.5px #2563eb,0 0 12px rgba(96,165,250,0.15)}50%{box-shadow:0 0 0 1.5px #60a5fa,0 0 24px rgba(96,165,250,0.35)}}@keyframes shine{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .swrap{
   display:flex;gap:8px;align-items:center;
   background:rgba(255,255,255,0.1);border-radius:10px;
@@ -61,7 +53,7 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 .swrap:focus-within{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.15)}
 #si{
   background:none;border:none;outline:none;flex:1;
-  font-size:20px;font-weight:700;color:#fff;letter-spacing:2px;
+  font-size:22px;font-weight:700;color:#fff;letter-spacing:1px;
   width:0;min-width:0;font-family:inherit
 }
 #si::placeholder{color:rgba(255,255,255,0.3);font-size:13px;font-weight:400;letter-spacing:0}
@@ -115,11 +107,19 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 
 /* stats */
 .idle-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px 4px}
-.stat-card{background:var(--card);border-radius:12px;padding:12px 14px;box-shadow:0 2px 12px rgba(26,39,68,0.07);border:1px solid rgba(221,226,239,0.6);transition:transform 0.15s,box-shadow 0.15s}
+.stat-card{display:none}
+.idle-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:4px 2px}
+.stat-card-a{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:14px 16px;position:relative;overflow:hidden;transition:box-shadow .15s}
+.stat-card-a:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.sca-bar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.sca-icon{font-size:18px;margin-bottom:6px;line-height:1}
+.stat-card-a .stat-num{font-size:26px;font-weight:700;color:var(--navy);line-height:1}
+.stat-card-a .stat-lbl{font-size:12px;color:#6b7a99;margin-top:5px}
+
 .stat-num{font-size:20px;font-weight:700;color:var(--navy);line-height:1}
 .stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.3px}
-.stat-bar{height:3px;border-radius:2px;background:var(--border);margin-top:8px;overflow:hidden}
-.stat-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#2563eb,#60a5fa)}
+
+
 .divider{height:1px;background:var(--border);margin:8px 14px 12px;opacity:0.5}
 
 /* quick search */
@@ -163,7 +163,7 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 .rtab{padding:5px 14px;border-radius:16px;border:1.5px solid var(--border);background:rgba(255,255,255,0.8);font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);transition:all 0.2s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(4px)}
 .rtab:active{transform:scale(0.95)}
 .rtab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.mapwrap{flex:1;display:flex;align-items:center;justify-content:center;padding:16px 24px 24px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,0.95) 0%,rgba(240,242,247,0.4) 100%)}
+.mapwrap{flex:1;display:flex;align-items:center;justify-content:center;padding:16px 24px 24px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,0.95) 0%,rgba(240,242,247,0.4) 100%);position:relative}
 .mapwrap>div{width:580px;flex-shrink:0}
 
 /* shelf */
@@ -181,7 +181,7 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 .shelf.it text{fill:#1a3560}
 
 /* maintain */
-.hstats{display:flex;gap:0;margin:0 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden}.hstat{padding:6px 18px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)}.hstat:last-child{border-right:none}.hstat-n{font-size:17px;font-weight:700;color:#fff;line-height:1}.hstat-l{font-size:9px;color:rgba(255,255,255,0.28);margin-top:3px;letter-spacing:.5px}#mpage{display:none;flex:1;overflow-y:auto;padding:14px}
+.hstats{display:flex;gap:0;margin:0 8px;background:rgba(255,255,255,0.7);border:1px solid rgba(37,99,235,0.15);border-radius:10px;overflow:hidden;flex-shrink:1;min-width:0}.hstat{padding:6px 10px;text-align:center;border-right:1px solid rgba(37,99,235,0.1);flex-shrink:1}.hstat:last-child{border-right:none}.hstat-n{font-size:17px;font-weight:700;color:#1e3a8a;line-height:1}.hstat-l{font-size:9px;color:#3b82f6;margin-top:3px;letter-spacing:.5px;opacity:.7}#mpage{display:none;flex:1;overflow-y:auto;padding:14px}
 .mc{background:var(--card);border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(26,39,68,0.07)}
 .mt{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:3px}
 .ms{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5}
@@ -241,7 +241,33 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 .notice-dot{width:5px;height:5px;border-radius:50%;background:#2563eb;animation:ntdot 2s ease-in-out infinite;flex-shrink:0}
 @keyframes ntdot{0%,100%{opacity:1}50%{opacity:0.3}}
 
-</style>
+
+@media(max-width:600px){
+  .hstats{display:none}
+  header{gap:8px;padding:0 10px}
+  h1{font-size:13px}
+  .hbtn{padding:6px 10px;font-size:10px}
+}
+@media(max-width:800px){
+  .hstat-n{font-size:13px}
+  .hstat-l{font-size:8px}
+  .hstat{padding:4px 8px}
+}
+
+@media(max-width:768px){
+  .layout{flex-direction:column}
+  .lpanel{width:100%!important;border-right:none;border-bottom:1px solid var(--border);flex:1;overflow-y:auto;display:none}
+  .lpanel.mob-active{display:flex}
+  .rpanel{flex:1;display:none!important}
+  .rpanel.mob-active{display:flex!important}
+  .mob-nav{display:flex!important}
+  #spage{flex-direction:column}
+}
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;background:var(--navy);border-top:1px solid rgba(255,255,255,0.1);z-index:100;flex-direction:row}
+.mob-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;color:rgba(255,255,255,0.5);font-size:9px;cursor:pointer;transition:color .15s;padding:6px 0}
+.mob-nav-btn.on{color:#60a5fa}
+.mob-nav-btn-icon{font-size:20px;line-height:1}
+.nomap-overlay{position:absolute;top:0;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;z-index:10;pointer-events:none}.nomap-overlay.show{display:flex!important}.nomap-overlay-bg{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(235,240,250,0.82);backdrop-filter:blur(3px)}.nomap-card{position:relative;z-index:1;background:#07091a;border-radius:20px;border:1px solid rgba(96,165,250,0.25);padding:28px 40px;text-align:center;overflow:hidden}.nomap-card::before{content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:140px;height:80px;background:radial-gradient(ellipse,rgba(96,165,250,0.15) 0%,transparent 70%)}.nomap-room{font-size:16px;font-weight:600;color:#e2e8f0;letter-spacing:.5px;margin-bottom:8px;position:relative}.nomap-line{width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,0.5),transparent);margin:6px auto}.nomap-col{font-size:52px;font-weight:700;color:#60a5fa;line-height:1;margin-bottom:6px;position:relative;text-shadow:0 0 20px rgba(96,165,250,0.3)}.nomap-lbl{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1.5px;text-transform:uppercase;position:relative}#mapsvg{overflow:auto;width:100%}#mapsvg svg{width:100%;height:auto;max-height:calc(100vh - 160px)}</style>
 </head>
 <body>
 
@@ -254,8 +280,10 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 <!-- notice: standalone fixed element, first in body -->
 
 
-<header>
-  <div class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+<header><svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 1800 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><defs><style>.pr{animation:hpulse 2.5s ease-out infinite}.pr2{animation:hpulse 2.5s ease-out infinite;animation-delay:-.8s}.pr3{animation:hpulse 2.5s ease-out infinite;animation-delay:-1.6s}.cloud1{animation:cloudDrift 12s ease-in-out infinite}.cloud2{animation:cloudDrift 16s ease-in-out infinite;animation-delay:-6s}.cloud3{animation:cloudDrift 14s ease-in-out infinite;animation-delay:-4s}.win1{animation:winGlow 3s ease-in-out infinite}.win2{animation:winGlow 3s ease-in-out infinite;animation-delay:-1.5s}.dot1{animation:dotMove 5s linear infinite}.dot2{animation:dotMove 5s linear infinite;animation-delay:-2s}.dot3{animation:dotMove 5s linear infinite;animation-delay:-3.8s}@keyframes hpulse{0%{r:4;opacity:.7}100%{r:20;opacity:0}}@keyframes cloudDrift{0%,100%{transform:translateX(0)}50%{transform:translateX(12px)}}@keyframes winGlow{0%,100%{opacity:.5}50%{opacity:.9}}@keyframes dotMove{0%{transform:translateX(0);opacity:0}5%{opacity:1}90%{opacity:1}100%{transform:translateX(800px);opacity:0}}</style></defs><g class="cloud1"><ellipse cx="160" cy="14" rx="28" ry="10" fill="#fff" opacity=".8"></ellipse><ellipse cx="142" cy="18" rx="18" ry="8" fill="#fff" opacity=".8"></ellipse><ellipse cx="180" cy="17" rx="16" ry="7" fill="#fff" opacity=".8"></ellipse></g><g class="cloud3"><ellipse cx="900" cy="12" rx="26" ry="9" fill="#fff" opacity=".6"></ellipse><ellipse cx="882" cy="16" rx="17" ry="7" fill="#fff" opacity=".6"></ellipse><ellipse cx="920" cy="15" rx="15" ry="7" fill="#fff" opacity=".6"></ellipse></g><g class="cloud2"><ellipse cx="1600" cy="13" rx="24" ry="9" fill="#fff" opacity=".7"></ellipse><ellipse cx="1582" cy="17" rx="16" ry="7" fill="#fff" opacity=".7"></ellipse></g><rect x="0" y="64" width="1800" height="8" fill="#bfdbfe" opacity=".5"></rect><polygon points="300,44 360,16 420,44" fill="#60a5fa" opacity=".7"></polygon><line x1="300" y1="44" x2="360" y2="16" stroke="#3b82f6" stroke-width="1" opacity=".4"></line><line x1="420" y1="44" x2="360" y2="16" stroke="#3b82f6" stroke-width="1" opacity=".4"></line><rect x="300" y="44" width="120" height="20" fill="#93c5fd" opacity=".7"></rect><rect x="330" y="50" width="30" height="14" rx="1" fill="#dbeafe" opacity=".9"></rect><line x1="330" y1="53" x2="360" y2="53" stroke="#93c5fd" stroke-width=".8" opacity=".6"></line><line x1="330" y1="56" x2="360" y2="56" stroke="#93c5fd" stroke-width=".8" opacity=".6"></line><line x1="330" y1="59" x2="360" y2="59" stroke="#93c5fd" stroke-width=".8" opacity=".6"></line><rect class="win1" x="306" y="50" width="14" height="8" rx="1" fill="#bfdbfe" opacity=".5"></rect><rect class="win2" x="396" y="50" width="14" height="8" rx="1" fill="#bfdbfe" opacity=".5"></rect><polygon points="820,46 878,22 936,46" fill="#a5b4fc" opacity=".6"></polygon><line x1="820" y1="46" x2="878" y2="22" stroke="#818cf8" stroke-width="1" opacity=".4"></line><line x1="936" y1="46" x2="878" y2="22" stroke="#818cf8" stroke-width="1" opacity=".4"></line><rect x="820" y="46" width="116" height="18" fill="#c4b5fd" opacity=".55"></rect><rect x="850" y="52" width="26" height="12" rx="1" fill="#eff6ff" opacity=".9"></rect><line x1="850" y1="55" x2="876" y2="55" stroke="#c4b5fd" stroke-width=".8" opacity=".6"></line><line x1="850" y1="58" x2="876" y2="58" stroke="#c4b5fd" stroke-width=".8" opacity=".6"></line><rect class="win1" x="826" y="52" width="14" height="7" rx="1" fill="#e0e7ff" opacity=".5"></rect><polygon points="1380,44 1440,18 1500,44" fill="#93c5fd" opacity=".6"></polygon><line x1="1380" y1="44" x2="1440" y2="18" stroke="#60a5fa" stroke-width="1" opacity=".4"></line><line x1="1500" y1="44" x2="1440" y2="18" stroke="#60a5fa" stroke-width="1" opacity=".4"></line><rect x="1380" y="44" width="120" height="20" fill="#bfdbfe" opacity=".6"></rect><rect x="1408" y="50" width="28" height="14" rx="1" fill="#eff6ff" opacity=".9"></rect><rect class="win2" x="1386" y="50" width="14" height="8" rx="1" fill="#dbeafe" opacity=".5"></rect><rect class="win1" x="1474" y="50" width="14" height="8" rx="1" fill="#dbeafe" opacity=".5"></rect><circle class="dot1" cx="440" cy="64" r="3" fill="#2563eb" opacity=".7"></circle><circle class="dot2" cx="440" cy="64" r="2.5" fill="#6366f1" opacity=".6"></circle><circle class="dot3" cx="440" cy="64" r="2" fill="#3b82f6" opacity=".5"></circle><circle class="pr" cx="360" cy="16" fill="none" stroke="#2563eb" stroke-width="1.5" r="4" opacity=".7"></circle><circle class="pr2" cx="360" cy="16" fill="none" stroke="#2563eb" stroke-width="1" r="4" opacity=".5"></circle><circle class="pr3" cx="878" cy="22" fill="none" stroke="#6366f1" stroke-width="1.5" r="4" opacity=".6"></circle><circle cx="360" cy="16" r="2.5" fill="#2563eb" opacity=".85"></circle><circle cx="878" cy="22" r="2" fill="#6366f1" opacity=".75"></circle><circle cx="1440" cy="18" r="2" fill="#60a5fa" opacity=".7"></circle></svg>
+
+  
+  <div class="logo" style="background:#2563eb;box-shadow:0 2px 10px rgba(37,99,235,0.25)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
   <h1>ルミピッキング検索<small id="hsub">6エリア — 665件</small></h1>
   <div class="hstats">
     <div class="hstat"><div class="hstat-n" id="hn0">320</div><div class="hstat-l">1F釣具</div></div>
@@ -264,7 +292,7 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
     <div class="hstat"><div class="hstat-n" id="hn3">74</div><div class="hstat-l">Irod</div></div>
     <div class="hstat"><div class="hstat-n" id="hn4">114</div><div class="hstat-l">資材ノベ</div></div>
   </div>
-  <span style="font-size:10px;color:rgba(255,255,255,0.18);letter-spacing:.6px;margin-right:8px">by MajorWoo / ウー</span>
+  <span style="font-size:10px;color:#1e3a8a;opacity:.25;letter-spacing:.6px;margin-right:8px">by MajorWoo / ウー</span>
   <div style="display:flex;gap:6px">
     <button class="hbtn on" id="bs" onclick="pg('s')">検索</button>
     <button class="hbtn" id="bm" onclick="pg('m')">データ更新</button>
@@ -274,8 +302,7 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
 <div class="layout" id="spage" style="display: flex;">
   <div class="lpanel">
     <div class="sbar">
-      <div class="swrap">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <div class="swrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input id="si" type="text" placeholder="商品コード / 商品名で検索" autocomplete="off" autocorrect="off" spellcheck="false">
         <button class="clr" id="clrb" onclick="clrs()" style="display: none;">✕</button>
       </div>
@@ -285,11 +312,11 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
       <div class="pname" id="pnm"></div>
       <div class="badges" id="pbdg"></div>
     </div>
-    <div class="lcontent" id="lc"><div class="idle-box"><div class="truck-stage" id="truck-stage"><div class="truck-road" id="truck-road"><div class="truck-rl" id="trl1" style="left:20px"></div><div class="truck-rl" id="trl2" style="left:180px"></div><div class="truck-rl" id="trl3" style="left:340px"></div></div><div id="t-truck" style="position:absolute;bottom:18px;left:-100px;font-size:52px;line-height:1;transform:scaleX(-1)">🚛</div><div class="t-box" id="t-box" style="left:44%;bottom:22px;animation:truckBoxFloat 2s ease-in-out infinite" onclick="boxClick()">📦</div></div><div class="et">商品コード / 商品名で検索</div><div class="es">2026/7/31 (金)&nbsp;&nbsp;09:53</div></div><div class="hist-wrap"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span class="hist-lbl" style="margin-bottom:0">🕐 履歴</span><span onclick="clearHistory()" style="font-size:10px;color:#9aa8c0;cursor:pointer;padding:2px 8px;border-radius:10px;border:1px solid #dde2ef;background:#fff">全削除</span></div><div class="hist-chips"><div class="hist-chip" onclick="sel('A00411')"><span class="hc-col">M</span><span class="hc-code">A00411</span></div><div class="hist-chip" onclick="sel('G80309')"><span class="hc-col">D1</span><span class="hc-code">G80309</span></div><div class="hist-chip" onclick="sel('G80300')"><span class="hc-col">B1</span><span class="hc-code">G80300</span></div><div class="hist-chip" onclick="sel('E20121')"><span class="hc-col">A1</span><span class="hc-code">E20121</span></div><div class="hist-chip" onclick="sel('G80303')"><span class="hc-col">B1</span><span class="hc-code">G80303</span></div><div class="hist-chip" onclick="sel('A01701')"><span class="hc-col">J</span><span class="hc-code">A01701</span></div></div></div><div class="idle-stats"><div class="stat-card"><div class="stat-num">665</div><div class="stat-lbl">総商品数</div><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div></div><div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">エリア</div><div class="stat-bar"><div class="stat-fill" style="width:100%;background:linear-gradient(90deg,#6a90cc,#a0b8e8)"></div></div></div><div class="stat-card"><div class="stat-num">21</div><div class="stat-lbl">テント倉庫</div><div class="stat-bar"><div class="stat-fill" style="width:3%"></div></div></div><div class="stat-card"><div class="stat-num">108</div><div class="stat-lbl">1Fノベルティ</div><div class="stat-bar"><div class="stat-fill" style="width:16%;background:linear-gradient(90deg,#f5a623,#f7c06a)"></div></div></div></div><div class="divider"></div><div class="quick-wrap"><div class="quick-lbl">QUICK SEARCH</div><div class="quick-chips"><div class="qchip" onclick="quickSearch('A')">Aシリーズ</div><div class="qchip" onclick="quickSearch('C')">Cシリーズ</div><div class="qchip" onclick="quickSearch('G')">Gシリーズ</div></div></div></div>
+    <div class="lcontent" id="lc"><div class="idle-box"><div class="truck-stage" id="truck-stage"><div class="truck-road" id="truck-road"><div class="truck-rl" id="trl1" style="left:20px"></div><div class="truck-rl" id="trl2" style="left:180px"></div><div class="truck-rl" id="trl3" style="left:340px"></div></div><div id="t-truck" style="position:absolute;bottom:18px;left:-100px;font-size:52px;line-height:1;transform:scaleX(-1)">🚛</div><div class="t-box" id="t-box" style="left:44%;bottom:22px;animation:truckBoxFloat 2s ease-in-out infinite" onclick="boxClick()">📦</div></div><div class="et">商品コード / 商品名で検索</div><div class="es">2026/8/6 (木)&nbsp;&nbsp;11:15</div></div><div class="hist-wrap"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span class="hist-lbl" style="margin-bottom:0">🕐 履歴</span><span onclick="clearHistory()" style="font-size:10px;color:#9aa8c0;cursor:pointer;padding:2px 8px;border-radius:10px;border:1px solid #dde2ef;background:#fff">全削除</span></div><div class="hist-chips"><div class="hist-chip" onclick="sel('E00485')"><span class="hc-col">A1</span><span class="hc-code">E00485</span></div><div class="hist-chip" onclick="sel('E00411')"><span class="hc-col">M1</span><span class="hc-code">E00411</span></div><div class="hist-chip" onclick="sel('A00411')"><span class="hc-col">M</span><span class="hc-code">A00411</span></div><div class="hist-chip" onclick="sel('G80309')"><span class="hc-col">D1</span><span class="hc-code">G80309</span></div><div class="hist-chip" onclick="sel('G80300')"><span class="hc-col">B1</span><span class="hc-code">G80300</span></div><div class="hist-chip" onclick="sel('E20121')"><span class="hc-col">A1</span><span class="hc-code">E20121</span></div><div class="hist-chip" onclick="sel('G80303')"><span class="hc-col">B1</span><span class="hc-code">G80303</span></div><div class="hist-chip" onclick="sel('A01701')"><span class="hc-col">J</span><span class="hc-code">A01701</span></div></div></div><div class="idle-stats"><div class="stat-card-a"><div class="sca-bar" style="background:#2563eb"></div><div class="sca-icon">📦</div><div class="stat-num">665</div><div class="stat-lbl">総商品数</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#818cf8"></div><div class="sca-icon">🗺</div><div class="stat-num">6</div><div class="stat-lbl">エリア</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#2563eb"></div><div class="sca-icon">🎣</div><div class="stat-num">21</div><div class="stat-lbl">テント倉庫</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#818cf8"></div><div class="sca-icon">🚪</div><div class="stat-num">108</div><div class="stat-lbl">1Fノベルティ</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#34d399"></div><div class="sca-icon">🏭</div><div class="stat-num">320</div><div class="stat-lbl">1F釣具部屋</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#f5a623"></div><div class="sca-icon">⭐</div><div class="stat-num">28</div><div class="stat-lbl">2F渡り廊下</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#f97316"></div><div class="sca-icon">📋</div><div class="stat-num">114</div><div class="stat-lbl">資材倉庫・ノベルティ</div></div><div class="stat-card-a"><div class="sca-bar" style="background:#e879f9"></div><div class="sca-icon">📦</div><div class="stat-num">74</div><div class="stat-lbl">資材倉庫・Irod</div></div></div><div class="divider"></div><div class="quick-wrap"><div class="quick-lbl">QUICK SEARCH</div><div class="quick-chips"><div class="qchip" onclick="quickSearch('A')">Aシリーズ</div><div class="qchip" onclick="quickSearch('C')">Cシリーズ</div><div class="qchip" onclick="quickSearch('G')">Gシリーズ</div></div></div></div>
   </div>
   <div class="rpanel">
     <div class="maptop"><span class="maplb">MAP</span><div class="rtabs" id="rtabs"><button class="rtab on" onclick="swRoomIdx(0)">1F釣具部屋</button><button class="rtab" onclick="swRoomIdx(1)">2F渡り廊下</button><button class="rtab" onclick="swRoomIdx(2)">1Fノベルティ</button><button class="rtab" onclick="swRoomIdx(3)">資材倉庫・Irod</button><button class="rtab" onclick="swRoomIdx(4)">資材倉庫・ノベルティ</button></div></div>
-    <div class="mapwrap"><div id="mapsvg"><svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" style="font-family:sans-serif;display:block;width:100%;height:auto"><rect x="2" y="2" width="496" height="356" rx="10" fill="#f5f0e8" stroke="#c8bfaa" stroke-width="1.5" onclick="bgClick(event)"></rect><rect x="12" y="12" width="476" height="336" rx="8" fill="#ede8df"></rect><rect x="208" y="12" width="18" height="280" fill="#e0dbd2" opacity="0.5"></rect><g class="shelf it" id="shelf-M" onclick="shelfClick('M',0)"><rect x="460" y="12" width="28" height="280" rx="6" fill="#d4cfc6" stroke="#b8b0a0" stroke-width="1"></rect><text x="474" y="152" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#6a7a8a">M</text><g class="shelf-badge"><circle cx="478" cy="22" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="478" y="22" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">12</text></g></g><g class="shelf it" id="shelf-F" onclick="shelfClick('F',0)"><rect x="16" y="16" width="186" height="40" rx="6"></rect><text x="109" y="36" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">F</text><g class="shelf-badge"><circle cx="192" cy="26" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="26" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">41</text></g></g><g class="shelf it" id="shelf-E" onclick="shelfClick('E',0)"><rect x="16" y="66" width="186" height="40" rx="6"></rect><text x="109" y="86" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">E</text><g class="shelf-badge"><circle cx="192" cy="76" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="76" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">27</text></g></g><g class="shelf it" id="shelf-D" onclick="shelfClick('D',0)"><rect x="16" y="106" width="186" height="40" rx="6"></rect><text x="109" y="126" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">D</text><g class="shelf-badge"><circle cx="192" cy="116" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="116" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">48</text></g></g><g class="shelf it" id="shelf-C" onclick="shelfClick('C',0)"><rect x="16" y="156" width="186" height="40" rx="6"></rect><text x="109" y="176" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">C</text><g class="shelf-badge"><circle cx="192" cy="166" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="166" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">22</text></g></g><g class="shelf it" id="shelf-B" onclick="shelfClick('B',0)"><rect x="16" y="196" width="186" height="40" rx="6"></rect><text x="109" y="216" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">B</text><g class="shelf-badge"><circle cx="192" cy="206" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="206" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">11</text></g></g><g class="shelf it" id="shelf-A" onclick="shelfClick('A',0)"><rect x="16" y="248" width="186" height="40" rx="6"></rect><text x="109" y="268" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">A</text><g class="shelf-badge"><circle cx="192" cy="258" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="258" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">11</text></g></g><g class="shelf it" id="shelf-L" onclick="shelfClick('L',0)"><rect x="234" y="16" width="218" height="40" rx="6"></rect><text x="343" y="36" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">L</text><g class="shelf-badge"><circle cx="442" cy="26" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="26" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">28</text></g></g><g class="shelf it" id="shelf-K" onclick="shelfClick('K',0)"><rect x="234" y="66" width="218" height="40" rx="6"></rect><text x="343" y="86" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">K</text><g class="shelf-badge"><circle cx="442" cy="76" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="76" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">27</text></g></g><g class="shelf it" id="shelf-J" onclick="shelfClick('J',0)"><rect x="234" y="106" width="218" height="40" rx="6"></rect><text x="343" y="126" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">J</text><g class="shelf-badge"><circle cx="442" cy="116" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="116" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">47</text></g></g><g class="shelf it" id="shelf-I" onclick="shelfClick('I',0)"><rect x="234" y="156" width="218" height="40" rx="6"></rect><text x="343" y="176" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">I</text><g class="shelf-badge"><circle cx="442" cy="166" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="166" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">24</text></g></g><g class="shelf it" id="shelf-H" onclick="shelfClick('H',0)"><rect x="234" y="196" width="218" height="40" rx="6"></rect><text x="343" y="216" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">H</text><g class="shelf-badge"><circle cx="442" cy="206" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="206" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">10</text></g></g><g class="shelf it" id="shelf-G" onclick="shelfClick('G',0)"><rect x="234" y="248" width="218" height="40" rx="6"></rect><text x="343" y="268" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">G</text><g class="shelf-badge"><circle cx="442" cy="258" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="258" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">12</text></g></g><polygon points="217,232 207,246 227,246" fill="#5b9bd5" opacity="0.85"></polygon><rect x="207" y="246" width="20" height="42" rx="2" fill="#5b9bd5" opacity="0.7"></rect><rect x="174" y="298" width="86" height="22" rx="11" fill="#5b9bd5" opacity="0.9"></rect><text x="217" y="309" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="600" fill="#fff">入口（ノベルティ）</text><text x="250" y="342" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#9a8f80">【1F釣具部屋】</text></svg></div></div>
+    <div class="mapwrap" style="position:relative"><div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center"><div id="mapsvg" style="width:100%"><svg viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg" style="font-family:sans-serif;display:block;width:100%;height:auto"><rect x="2" y="2" width="496" height="356" rx="10" fill="#f5f0e8" stroke="#c8bfaa" stroke-width="1.5" onclick="bgClick(event)"></rect><rect x="12" y="12" width="476" height="336" rx="8" fill="#ede8df"></rect><rect x="208" y="12" width="18" height="280" fill="#e0dbd2" opacity="0.5"></rect><g class="shelf it" id="shelf-M" onclick="shelfClick('M',0)"><rect x="460" y="12" width="28" height="280" rx="6" fill="#d4cfc6" stroke="#b8b0a0" stroke-width="1"></rect><text x="474" y="152" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#6a7a8a">M</text><g class="shelf-badge"><circle cx="478" cy="22" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="478" y="22" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">12</text></g></g><g class="shelf it" id="shelf-F" onclick="shelfClick('F',0)"><rect x="16" y="16" width="186" height="40" rx="6"></rect><text x="109" y="36" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">F</text><g class="shelf-badge"><circle cx="192" cy="26" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="26" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">41</text></g></g><g class="shelf it" id="shelf-E" onclick="shelfClick('E',0)"><rect x="16" y="66" width="186" height="40" rx="6"></rect><text x="109" y="86" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">E</text><g class="shelf-badge"><circle cx="192" cy="76" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="76" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">27</text></g></g><g class="shelf it" id="shelf-D" onclick="shelfClick('D',0)"><rect x="16" y="106" width="186" height="40" rx="6"></rect><text x="109" y="126" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">D</text><g class="shelf-badge"><circle cx="192" cy="116" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="116" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">48</text></g></g><g class="shelf it" id="shelf-C" onclick="shelfClick('C',0)"><rect x="16" y="156" width="186" height="40" rx="6"></rect><text x="109" y="176" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">C</text><g class="shelf-badge"><circle cx="192" cy="166" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="166" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">22</text></g></g><g class="shelf it" id="shelf-B" onclick="shelfClick('B',0)"><rect x="16" y="196" width="186" height="40" rx="6"></rect><text x="109" y="216" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">B</text><g class="shelf-badge"><circle cx="192" cy="206" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="206" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">11</text></g></g><g class="shelf it" id="shelf-A" onclick="shelfClick('A',0)"><rect x="16" y="248" width="186" height="40" rx="6"></rect><text x="109" y="268" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">A</text><g class="shelf-badge"><circle cx="192" cy="258" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="192" y="258" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">11</text></g></g><g class="shelf it" id="shelf-L" onclick="shelfClick('L',0)"><rect x="234" y="16" width="218" height="40" rx="6"></rect><text x="343" y="36" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">L</text><g class="shelf-badge"><circle cx="442" cy="26" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="26" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">28</text></g></g><g class="shelf it" id="shelf-K" onclick="shelfClick('K',0)"><rect x="234" y="66" width="218" height="40" rx="6"></rect><text x="343" y="86" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">K</text><g class="shelf-badge"><circle cx="442" cy="76" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="76" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">27</text></g></g><g class="shelf it" id="shelf-J" onclick="shelfClick('J',0)"><rect x="234" y="106" width="218" height="40" rx="6"></rect><text x="343" y="126" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">J</text><g class="shelf-badge"><circle cx="442" cy="116" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="116" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">47</text></g></g><g class="shelf it" id="shelf-I" onclick="shelfClick('I',0)"><rect x="234" y="156" width="218" height="40" rx="6"></rect><text x="343" y="176" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">I</text><g class="shelf-badge"><circle cx="442" cy="166" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="166" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">24</text></g></g><g class="shelf it" id="shelf-H" onclick="shelfClick('H',0)"><rect x="234" y="196" width="218" height="40" rx="6"></rect><text x="343" y="216" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">H</text><g class="shelf-badge"><circle cx="442" cy="206" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="206" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">10</text></g></g><g class="shelf it" id="shelf-G" onclick="shelfClick('G',0)"><rect x="234" y="248" width="218" height="40" rx="6"></rect><text x="343" y="268" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="700">G</text><g class="shelf-badge"><circle cx="442" cy="258" r="8" fill="#f5a623" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"></circle><text x="442" y="258" text-anchor="middle" dominant-baseline="middle" font-size="7" font-weight="700" fill="#fff" pointer-events="none">12</text></g></g><polygon points="217,232 207,246 227,246" fill="#5b9bd5" opacity="0.85"></polygon><rect x="207" y="246" width="20" height="42" rx="2" fill="#5b9bd5" opacity="0.7"></rect><rect x="174" y="298" width="86" height="22" rx="11" fill="#5b9bd5" opacity="0.9"></rect><text x="217" y="309" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="600" fill="#fff">入口（ノベルティ）</text><text x="250" y="342" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#9a8f80">【1F釣具部屋】</text></svg></div><div class="nomap-overlay" id="nomapOverlay"><div class="nomap-overlay-bg"></div><div class="nomap-card"><div class="nomap-room" id="nomapRoom"></div><div class="nomap-line"></div><div class="nomap-col" id="nomapCol"></div><div class="nomap-line"></div><div class="nomap-lbl">地図未登録エリア</div></div></div></div></div>
   </div>
 </div>
 
@@ -336,6 +363,17 @@ h1 small{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;letter-spaci
   </div>
 </div>
 
+
+<div class="mob-nav" id="mobNav">
+  <button class="mob-nav-btn on" id="mnSearch" onclick="mobTab('search')">
+    <div class="mob-nav-btn-icon">🔍</div>
+    <span>検索</span>
+  </button>
+  <button class="mob-nav-btn" id="mnMap" onclick="mobTab('map')">
+    <div class="mob-nav-btn-icon">🗺️</div>
+    <span>MAP</span>
+  </button>
+</div>
 
 <script>
 
@@ -426,15 +464,15 @@ var inp=document.getElementById('si'),clrb=document.getElementById('clrb');
 inp.addEventListener('input',function(){
   var v=inp.value.trim().toUpperCase();
   clrb.style.display=v?'flex':'none';
-  if(!v){curCol=null;updMap();document.getElementById('rescrd').style.display='none';}
+  if(!v){curCol=null;updMap();document.getElementById('rescrd').style.display='none';var ov=document.getElementById('nomapOverlay');if(ov){ov.classList.remove('show');var ms=document.getElementById('mapsvg');if(ms)ms.style.opacity='1';}showEmpty();}
   srch(v);
 });
-function clrs(){inp.value='';clrb.style.display='none';curCol=null;updMap();setList(null);document.getElementById('rescrd').style.display='none';showEmpty();}
+function clrs(){inp.value='';clrb.style.display='none';curCol=null;updMap();setList(null);document.getElementById('rescrd').style.display='none';var ov=document.getElementById('nomapOverlay');if(ov){ov.classList.remove('show');var ms=document.getElementById('mapsvg');if(ms)ms.style.opacity='1';}showEmpty();}
 
 function addHistory(p){
   HISTORY=HISTORY.filter(function(h){return h.code!==p.code;});
   HISTORY.unshift({code:p.code,name:p.name,col:p.col});
-  if(HISTORY.length>6)HISTORY.pop();
+  if(HISTORY.length>12)HISTORY.pop();
   try{localStorage.setItem('lumi_history',JSON.stringify(HISTORY));}catch(e){}
 }
 function clearHistory(){
@@ -463,16 +501,18 @@ function srch(code){
   var isAlphaNum=/^[A-Za-z0-9]+$/.test(code);
   if(isAlphaNum)code=code.toUpperCase();
   var found=null;
-  if(isAlphaNum){for(var i=0;i<PRODUCTS.length;i++){if(PRODUCTS[i].code===code){found=PRODUCTS[i];break;}}}
+  if(isAlphaNum){
+    for(var i=0;i<PRODUCTS.length;i++){if(PRODUCTS[i].code===code){found=PRODUCTS[i];break;}}
+  }
   if(found){
     addHistory(found);
     if(found.room!==curRoom){curRoom=found.room;renderMap(curRoom);}
-    curCol=found.col;updMap();showRes(found);setList(found.col,found.code);
+    curCol=found.col;updMap();showRes(found);setList(found.col,found.code);showNomapOverlay(found);
     return;
   }
   document.getElementById('rescrd').style.display='none';
   if(isAlphaNum){
-    var byCode=PRODUCTS.filter(function(p){return p.code.indexOf(code)===0;});
+    var byCode=PRODUCTS.filter(function(p){return p.code.indexOf(code)>=0;});
     if(byCode.length){showCands(code,byCode,false);return;}
   }
   var cl=code.toLowerCase();
@@ -482,6 +522,7 @@ function srch(code){
 }
 function sel(code){inp.value=code;clrb.style.display='flex';srch(code);}
 
+function showNomapOverlay(p){var ov=document.getElementById('nomapOverlay');if(!ov)return;var ms=document.getElementById('mapsvg');var hasMap=ROOM_NAMES.indexOf(p.room)>=0;if(hasMap){ov.classList.remove('show');if(ms)ms.style.opacity='1';}else{ov.classList.add('show');if(ms)ms.style.opacity='0.2';document.getElementById('nomapRoom').textContent=p.room;document.getElementById('nomapCol').textContent=p.col;}}
 function showRes(p){
   var rc=document.getElementById('rescrd');rc.style.display='block';
   document.getElementById('pnm').textContent=p.name||p.code;
@@ -533,11 +574,27 @@ function showEmpty(){
   html+='</div>';
   html+=renderHistory();
   html+='<div class="idle-stats">';
-  html+='<div class="stat-card"><div class="stat-num">'+total+'</div><div class="stat-lbl">\u7dcf\u5546\u54c1\u6570</div><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div></div>';
-  html+='<div class="stat-card"><div class="stat-num">'+rooms.length+'</div><div class="stat-lbl">\u30a8\u30ea\u30a2</div><div class="stat-bar"><div class="stat-fill" style="width:100%;background:linear-gradient(90deg,#6a90cc,#a0b8e8)"></div></div></div>';
-  if(room1)html+='<div class="stat-card"><div class="stat-num">'+cnt1+'</div><div class="stat-lbl">'+room1+'</div><div class="stat-bar"><div class="stat-fill" style="width:'+Math.round(cnt1/total*100)+'%"></div></div></div>';
-  if(room2)html+='<div class="stat-card"><div class="stat-num">'+cnt2+'</div><div class="stat-lbl">'+room2+'</div><div class="stat-bar"><div class="stat-fill" style="width:'+Math.round(cnt2/total*100)+'%;background:linear-gradient(90deg,#f5a623,#f7c06a)"></div></div></div>';
-  html+='</div>';
+var _ac=['#2563eb','#818cf8','#34d399','#f5a623','#f97316','#e879f9','#22d3ee'];
+var _ai=['📦','🗺','🎣','🚪','🏭','⭐','📋'];
+html+='<div class="stat-card-a"><div class="sca-bar" style="background:#2563eb"></div>'
+  +'<div class="sca-icon">📦</div>'
+  +'<div class="stat-num">'+total+'</div>'
+  +'<div class="stat-lbl">総商品数</div></div>';
+html+='<div class="stat-card-a"><div class="sca-bar" style="background:#818cf8"></div>'
+  +'<div class="sca-icon">🗺</div>'
+  +'<div class="stat-num">'+rooms.length+'</div>'
+  +'<div class="stat-lbl">エリア</div></div>';
+rooms.forEach(function(r,i){
+  var cnt=PRODUCTS.filter(function(p){return p.room===r;}).length;
+  var color=_ac[i%_ac.length];
+  var icon=_ai[(i+2)%_ai.length];
+  html+='<div class="stat-card-a">'
+    +'<div class="sca-bar" style="background:'+color+'"></div>'
+    +'<div class="sca-icon">'+icon+'</div>'
+    +'<div class="stat-num">'+cnt+'</div>'
+    +'<div class="stat-lbl">'+r+'</div></div>';
+});
+html+='</div>';
   html+='<div class="divider"></div>';
   html+='<div class="quick-wrap"><div class="quick-lbl">QUICK SEARCH</div><div class="quick-chips">';
   html+='<div class="qchip" onclick="quickSearch(\'A\')">A\u30b7\u30ea\u30fc\u30ba</div>';
@@ -617,6 +674,30 @@ function saveNotice(){
   if(el)el.textContent=txt;
   try{localStorage.setItem('lumi_notice',txt);}catch(e){}
   showSt('ok','✅ お知らせを更新しました');
+}
+function mobTab(tab){
+  var lp=document.querySelector('.lpanel');
+  var rp=document.querySelector('.rpanel');
+  var bs=document.getElementById('mnSearch');
+  var bm=document.getElementById('mnMap');
+  if(!lp||!rp)return;
+  if(tab==='search'){
+    lp.classList.add('mob-active');
+    rp.classList.remove('mob-active');
+    bs.classList.add('on');bm.classList.remove('on');
+  } else {
+    rp.classList.add('mob-active');
+    lp.classList.remove('mob-active');
+    bm.classList.add('on');bs.classList.remove('on');
+  }
+}
+function initMob(){
+  var lp=document.querySelector('.lpanel');
+  var rp=document.querySelector('.rpanel');
+  if(window.innerWidth<=768){
+    if(lp)lp.classList.add('mob-active');
+    if(rp)rp.classList.remove('mob-active');
+  }
 }
 function toggleNotice(){
   var p=document.getElementById('noticePanel');
@@ -934,7 +1015,7 @@ function parseWS(xml,ss){
 setInterval(function(){if(!inp.value.trim())showEmpty();},60000);
 try{var _n=localStorage.getItem('lumi_notice');if(_n){var nb=document.getElementById('noticeBody');if(nb)nb.textContent=_n;}}catch(e){}
 try{var _h=localStorage.getItem('lumi_history');if(_h)HISTORY=JSON.parse(_h);}catch(e){}
-updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();
+updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();initMob();
 
 </script>
 
