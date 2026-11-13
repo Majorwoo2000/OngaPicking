@@ -1211,7 +1211,8 @@ updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();initMob();
   };}
 
   // ひとことメッセージ（常設＋定期）
-  var base=['❄ 冬季限定版です。今日も寒い中おつかれさまです！','☕ 手が冷えたら、あったかい飲み物でひと休み','⛄ 倉庫は冷えます。あったかくしてピッキングを','🎁 今日のピッキングもあと少し！','🧣 冬季限定版、営業中です','🧤 段ボールで手が乾燥しがち。ハンドクリームを','🍊 こたつにみかん、まだ少し先かな','💧 暖房で乾燥中。水分補給も忘れずに','🦶 足元から冷えます。カイロ大活躍の季節','⭐ いつもピッキングありがとうございます'];
+  var base=['❄ 冬季限定版です。今日も寒い中おつかれさまです！','☕ 手が冷えたら、あったかい飲み物でひと休み','⛄ 倉庫は冷えます。あったかくしてピッキングを','🎁 今日のピッキングもあと少し！','🧣 冬季限定版、営業中です','🧤 段ボールで手が乾燥しがち。ハンドクリームを','🍊 こたつにみかん、まだ少し先かな','💧 暖房で乾燥中。水分補給も忘れずに','🦶 足元から冷えます。カイロ大活躍の季節','⭐ いつもピッキングありがとうございます','🌨 外は雪かな？たまには窓の外も','🧥 倉庫の出入り、上着を忘れずに','📦 重い箱は腰を落として。ぎっくり腰注意！','🫖 ほっと一息、それも大事な仕事です','❄ 冬の倉庫、今日もありがとうございます','🍠 焼き芋がおいしい季節ですね','⛄ 雪だるまも応援しています','🌡 寒暖差に気をつけて、体調管理を','✨ ゆっくり確実に、今日もノーミスで','🧦 靴下二枚ばき、おすすめです'];
+  var recent=[];
   function pick(){
     var d=new Date(),h=d.getHours(),w=d.getDay(),m=d.getMonth()+1,dt=d.getDate(),ex=[];
     if(h<10)ex.push('🌅 おはようございます！朝の倉庫は特に冷えます','☀ 今日も一日よろしくお願いします');
@@ -1223,7 +1224,7 @@ updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();initMob();
     if(m===12&&dt>=20&&dt<=25)ex.push('🎄 メリークリスマス！','🎅 サンタさんもピッキング中かも');
     if(m===12&&dt>=26)ex.push('🧹 年末ラストスパート！今年もありがとうございました');
     if(m===1&&dt<=10)ex.push('🎍 あけましておめでとうございます！今年もよろしくお願いします');
-    var all=ex.concat(ex).concat(base);return all[Math.floor(Math.random()*all.length)];
+    var all=ex.concat(ex).concat(base).filter(function(x){return recent.indexOf(x)<0;});if(!all.length){recent=[];all=base;}var t=all[Math.floor(Math.random()*all.length)];recent.push(t);if(recent.length>12)recent.shift();return t;
   }
   var cur=pick();
   // 雪だるまの吹き出し（MAP側）
@@ -1250,8 +1251,17 @@ updH();updCI();renderMap(ROOM_NAMES[0]);showEmpty();initMob();
   }
   setTimeout(function(){toast(cur);},900);
   // 1分ごとに吹き出しを入れ替え、20分ごとにトーストでも表示
-  var tick=0;
-  setInterval(function(){if(document.hidden)return;tick++;var t=pick();if(t===cur)t=pick();setAll(t);if(tick%20===0)toast(t);},60000);
+  // 30秒ごとに入れ替え（タイマーが止まる端末でも時刻基準で確実に更新）、10分ごとにトースト
+  var lastChange=Date.now(),lastToast=Date.now();
+  function rotate(){var n=Date.now();
+    if(n-lastChange>=30000){lastChange=n;setAll(pick());}
+    if(n-lastToast>=600000){lastToast=n;toast(cur);}
+  }
+  setInterval(rotate,5000);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden){lastChange=0;rotate();}});
+  window.addEventListener('focus',function(){rotate();});
+  // 検索を消して待機画面に戻ったら新しいひとこと
+  var wasBusy=false;setInterval(function(){var b=lp&&lp.classList.contains('ws-busy');if(wasBusy&&!b){lastChange=Date.now();setAll(pick());}wasBusy=b;},800);
   // 画面をタッチした瞬間（しばらく放置後）にもひとこと
   var last=Date.now();
   document.addEventListener('pointerdown',function(){var n=Date.now();if(n-last>10*60000){var t=pick();setAll(t);setTimeout(function(){toast(t);},300);}last=n;},true);
